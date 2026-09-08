@@ -1,0 +1,91 @@
+# DEMO2 — Pattern Recognition
+
+Lab Demonstration 2 for COMP3710. See [`COMP3710_Lab_2_2026.pdf`](COMP3710_Lab_2_2026.pdf) for the
+official task sheet.
+
+Each `part*/` folder is self-contained: a fully executed Jupyter notebook (outputs, plots and all)
+plus a `steps/` folder with any standalone scripts or extracted images used while developing it.
+
+## Part 1 — Discrete Fourier Transform (1 mark) ✅
+
+[`part1/Part1_DFT.ipynb`](part1/Part1_DFT.ipynb)
+
+- Reconstructs a square wave from its Fourier series and studies the Gibbs phenomenon.
+- Naive DFT vs. NumPy's FFT, with a discussion of why the algorithmic complexity difference
+  ($O(N^2)$ vs. $O(N\log N)$) dominates everything else.
+- `square_wave`, `square_wave_fourier`, and `naive_dft` re-implemented in PyTorch, including a
+  vectorised-matmul GPU version of the DFT.
+- Timing comparisons across problem sizes (NumPy naive/FFT vs. PyTorch CPU/GPU), run both on a
+  laptop (Apple Silicon `mps`) and, as an appendix, on a real NVIDIA GPU (Google Colab, `cuda`).
+
+## Part 2 — Eigenfaces (1 mark) ✅
+
+[`part2/Part2_Eigenfaces.ipynb`](part2/Part2_Eigenfaces.ipynb)
+
+- PCA (via SVD) on the LFW face dataset; eigenfaces visualised as a gallery.
+- Compactness plot (cumulative explained variance vs. number of components).
+- Random Forest classifier on the PCA-reduced features; per-class precision/recall/F1, with a
+  discussion of the class-imbalance problem in LFW.
+- A small self-contained 2D SVD/PCA demo (`part2/steps/svd_2d_demo.py`) used to build intuition
+  before applying the same idea to 1850-dimensional face images.
+
+## Part 3 — CNNs (5 marks)
+
+### 3.1 CNN classifier (1 mark) ✅
+
+[`part3/Part3_CNN.ipynb`](part3/Part3_CNN.ipynb)
+
+- A small CNN (two 3x3 conv layers, 32 filters each, + dense layers) trained end-to-end on the
+  same LFW faces, in PyTorch.
+- 88.2% test accuracy vs. 61% for the Part 2 PCA + Random Forest pipeline, evaluated on the
+  identical held-out test set for a fair comparison.
+- Training/test accuracy curves showing (and discussing) overfitting.
+
+### 3.2 DAWNBench challenge — ResNet-18 on CIFAR-10 (4 marks) ⏳ needs Rangpur
+
+[`part3/Part3_2_DAWNBench.ipynb`](part3/Part3_2_DAWNBench.ipynb) — architecture, training
+function, and a local correctness smoke test (small subset, few epochs; **not** the real target).
+
+[`part3/train_resnet_cifar.py`](part3/train_resnet_cifar.py) — the Rangpur-ready CLI version of
+the same code (full dataset, `device="cuda"`, `--amp` for mixed precision).
+
+[`part3/submit_quick_test.sh`](part3/submit_quick_test.sh),
+[`part3/submit_full_dawnbench.sh`](part3/submit_full_dawnbench.sh) — SLURM job scripts for the
+`comp3710` partition on Rangpur (quick 1-epoch sanity/demo run, and the full mixed-precision run
+respectively).
+
+ResNet-18 is implemented from scratch (no pretrained/pre-built model), with the CIFAR-style stem
+(3x3 stride-1, no aggressive early downsampling) rather than the ImageNet stem. **Status:** code
+is written and verified for correctness locally; the actual DAWNBench targets (>90% accuracy,
+>=94% in ~360s with mixed precision on a V100-class GPU, and the live Rangpur demo) still need to
+be run on the cluster once a GPU allocation comes through.
+
+## Part 4 — Recognition (8 marks)
+
+### 4.1 Advanced Git Course (1 mark) ⏳ not code — external edX course
+
+Not a coding task — complete the "Version Control for Teams using Git" short course on edX (see
+the course's Blackboard/Ed Discussion post for the current enrolment link).
+
+### 4.2–4.4 Recognition tasks — target: Medium (Tasks 1+2, up to 5/7 marks)
+
+All three tasks use the **Preprocessed OASIS** brain MRI dataset, which only exists at
+`/home/groups/comp3710/` on Rangpur — not available locally. Each task below is therefore built
+and verified locally on a stand-in dataset (documented in each notebook) first, with a "porting to
+Rangpur" section spelling out exactly what changes for the real data.
+
+- **Task 1 — VAE (Easy, 3 marks)** ✅ locally verified, ⏳ needs Rangpur for the real OASIS run
+  [`part4/Part4_Task1_VAE.ipynb`](part4/Part4_Task1_VAE.ipynb) — built and trained on MNIST as a
+  stand-in. Reconstructions, a 2D latent-space scatter plot, and the required manifold
+  visualisation (decoding a grid of latent points) are all included and discussed.
+- **Task 2 — UNet segmentation (+2 marks, Medium)**
+- **Task 3 — GAN (+2 marks, Hard)**
+
+## Environment notes
+
+- Local development happened on a MacBook with no NVIDIA GPU — PyTorch's `mps` backend (Apple
+  Silicon) stands in for `cuda` wherever a GPU comparison or GPU training run was needed locally.
+  Anything that must run on real NVIDIA hardware is clearly marked "needs Rangpur" above.
+- Rangpur access: SSH to `rangpur.compute.eait.uq.edu.au` with your UQ credentials; GPU jobs go
+  through SLURM on the `comp3710` partition (`sinfo -p comp3710` to check node availability,
+  `squeue -u $USER` to check your own jobs).
