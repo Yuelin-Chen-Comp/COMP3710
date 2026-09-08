@@ -17,4 +17,7 @@
 echo "Running on node: $(hostname)"
 nvidia-smi --query-gpu=name,memory.total --format=csv
 
-python3 train_resnet_cifar.py --epochs 1 --batch-size 512
+# $HOME is shared across every node in the cluster (unlike /tmp, which is node-local) --
+# store the dataset there so it only needs to be downloaded once, regardless of which
+# node this job (or a later one) lands on.
+python3 train_resnet_cifar.py --epochs 1 --batch-size 512 --data-root "$HOME/cifar_data"

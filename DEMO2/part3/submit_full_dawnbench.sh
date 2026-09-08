@@ -10,11 +10,14 @@
 #SBATCH --job-name=resnet18_dawnbench
 #SBATCH --partition=comp3710
 #SBATCH --gres=gpu:1
-#SBATCH --time=00:30:00
+#SBATCH --time=00:45:00
 #SBATCH --output=dawnbench_%j.out
 #SBATCH --error=dawnbench_%j.err
 
 echo "Running on node: $(hostname)"
 nvidia-smi --query-gpu=name,memory.total --format=csv
 
-python3 train_resnet_cifar.py --epochs 20 --batch-size 512 --max-lr 0.4 --amp
+# $HOME is shared across every node in the cluster (unlike /tmp, which is node-local) --
+# store the dataset there so it only needs to be downloaded once, regardless of which
+# node this job (or a later one) lands on.
+python3 train_resnet_cifar.py --epochs 20 --batch-size 512 --max-lr 0.4 --amp --data-root "$HOME/cifar_data"
