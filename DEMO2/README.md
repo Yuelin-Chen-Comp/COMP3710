@@ -67,19 +67,28 @@ be run on the cluster once a GPU allocation comes through.
 Not a coding task — complete the "Version Control for Teams using Git" short course on edX (see
 the course's Blackboard/Ed Discussion post for the current enrolment link).
 
-### 4.2–4.4 Recognition tasks — target: Medium (Tasks 1+2, up to 5/7 marks)
+### 4.2–4.4 Recognition tasks (up to 7 marks, Hard tier — all three tasks attempted)
 
 All three tasks use the **Preprocessed OASIS** brain MRI dataset, which only exists at
-`/home/groups/comp3710/` on Rangpur — not available locally. Each task below is therefore built
-and verified locally on a stand-in dataset (documented in each notebook) first, with a "porting to
-Rangpur" section spelling out exactly what changes for the real data.
+`/home/groups/comp3710/` on Rangpur — not available locally. Each task is therefore built and
+verified locally on a stand-in dataset (documented in each notebook) first, with a "porting to
+Rangpur" section spelling out exactly what changes for the real data. **All three are code-complete
+and locally verified; all three still need a real Rangpur/OASIS run** for full marks (the actual
+target metrics — DSC>0.9 on real brain tissue, OASIS-realistic GAN samples — can only be assessed
+on the real dataset, and the live demo requirement needs Rangpur regardless).
 
-- **Task 1 — VAE (Easy, 3 marks)** ✅ locally verified, ⏳ needs Rangpur for the real OASIS run
-  [`part4/Part4_Task1_VAE.ipynb`](part4/Part4_Task1_VAE.ipynb) — built and trained on MNIST as a
-  stand-in. Reconstructions, a 2D latent-space scatter plot, and the required manifold
-  visualisation (decoding a grid of latent points) are all included and discussed.
-- **Task 2 — UNet segmentation (+2 marks, Medium)**
-- **Task 3 — GAN (+2 marks, Hard)**
+- **Task 1 — VAE (Easy, 3 marks)** ✅ locally verified on MNIST
+  [`part4/Part4_Task1_VAE.ipynb`](part4/Part4_Task1_VAE.ipynb) — reconstructions, a 2D
+  latent-space scatter plot, and the required manifold visualisation (decoding a grid of latent
+  points) all included and discussed.
+- **Task 2 — UNet segmentation (+2 marks, Medium)** ✅ locally verified on synthetic shapes
+  [`part4/Part4_Task2_UNet.ipynb`](part4/Part4_Task2_UNet.ipynb) — categorical (one-hot) output,
+  per-class Dice score (>0.99 on the synthetic task; real OASIS will be a harder bar), and
+  input/ground-truth/prediction visualisations.
+- **Task 3 — GAN (+2 marks, Hard)** ✅ locally verified on MNIST (per the lab sheet's own
+  suggestion to start there before OASIS)
+  [`part4/Part4_Task3_GAN.ipynb`](part4/Part4_Task3_GAN.ipynb) — generator/discriminator training
+  curves, and generated-sample snapshots across training showing no mode collapse.
 
 ## Environment notes
 
