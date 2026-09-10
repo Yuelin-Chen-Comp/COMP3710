@@ -9,7 +9,8 @@
 
 #SBATCH --job-name=resnet18_quick
 #SBATCH --partition=comp3710
-#SBATCH --gres=gpu:1
+#SBATCH --account=comp3710
+#SBATCH --gres=gpu
 #SBATCH --mem=16G
 #SBATCH --time=00:20:00
 #SBATCH --output=quick_test_%j.out
