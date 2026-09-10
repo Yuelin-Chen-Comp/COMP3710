@@ -4,20 +4,25 @@
 # these starting values are a reasonable guess, not guaranteed to hit the target as-is.
 #
 # Submit with:  sbatch submit_full_dawnbench.sh
-# Check status: squeue -u $USER
+# Check status: squeue --me
 # Watch output: tail -f dawnbench_<jobid>.out
 
 #SBATCH --job-name=resnet18_dawnbench
 #SBATCH --partition=comp3710
 #SBATCH --gres=gpu:1
+#SBATCH --mem=16G
 #SBATCH --time=00:45:00
 #SBATCH --output=dawnbench_%j.out
 #SBATCH --error=dawnbench_%j.err
 
-echo "Running on node: $(hostname)"
+echo "Job $SLURM_JOB_ID on $(hostname), started $(date)"
 nvidia-smi --query-gpu=name,memory.total --format=csv
+
+# A batch job starts from a clean environment, so activate the conda env here.
+source $HOME/miniconda3/bin/activate
+conda activate torch
 
 # $HOME is shared across every node in the cluster (unlike /tmp, which is node-local) --
 # store the dataset there so it only needs to be downloaded once, regardless of which
 # node this job (or a later one) lands on.
-python3 train_resnet_cifar.py --epochs 20 --batch-size 512 --max-lr 0.4 --amp --data-root "$HOME/cifar_data"
+python train_resnet_cifar.py --epochs 20 --batch-size 512 --max-lr 0.4 --amp --data-root "$HOME/cifar_data"
