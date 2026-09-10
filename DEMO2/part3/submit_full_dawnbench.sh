@@ -11,7 +11,6 @@
 #SBATCH --partition=comp3710
 #SBATCH --account=comp3710
 #SBATCH --gres=gpu
-#SBATCH --mem=16G
 #SBATCH --time=00:45:00
 #SBATCH --output=dawnbench_%j.out
 #SBATCH --error=dawnbench_%j.err
