@@ -1,7 +1,7 @@
 #!/bin/bash
-# Full DAWNBench run: mixed precision + more epochs, aiming for the >90%/94% targets.
-# Tune --epochs and --max-lr based on what you see from the quick test job first --
-# these starting values are a reasonable guess, not guaranteed to hit the target as-is.
+# Full DAWNBench run: mixed precision, OneCycle LR, label smoothing + random erasing.
+# A plain 20-epoch run reached 93.01% in 301s. This adds label smoothing (0.1) and Cutout
+# (RandomErasing) and 4 more epochs to push past the 94% / ~360s target.
 #
 # Submit with:  sbatch submit_full_dawnbench.sh
 # Check status: squeue --me
@@ -25,4 +25,5 @@ conda activate torch
 # $HOME is shared across every node in the cluster (unlike /tmp, which is node-local) --
 # store the dataset there so it only needs to be downloaded once, regardless of which
 # node this job (or a later one) lands on.
-python train_resnet_cifar.py --epochs 20 --batch-size 512 --max-lr 0.4 --amp --data-root "$HOME/cifar_data"
+python train_resnet_cifar.py --epochs 24 --batch-size 512 --max-lr 0.4 --amp \
+    --label-smoothing 0.1 --data-root "$HOME/cifar_data"

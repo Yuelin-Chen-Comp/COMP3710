@@ -87,11 +87,14 @@ def ResNet18(num_classes=10):
 
 # ----------------------------- Training function -----------------------------
 
-def train_resnet18_cifar(train_loader, test_loader, n_epochs, device, use_amp=False, max_lr=0.1):
+def train_resnet18_cifar(train_loader, test_loader, n_epochs, device, use_amp=False,
+                         max_lr=0.1, label_smoothing=0.0):
     model = ResNet18(num_classes=10).to(device)
     optimizer = torch.optim.SGD(model.parameters(), lr=max_lr, momentum=0.9,
                                   weight_decay=5e-4, nesterov=True)
-    loss_fn = nn.CrossEntropyLoss()
+    # label smoothing softens the one-hot targets slightly, which reliably improves
+    # generalisation on CIFAR-10 (a small but consistent test-accuracy gain).
+    loss_fn = nn.CrossEntropyLoss(label_smoothing=label_smoothing)
     scheduler = torch.optim.lr_scheduler.OneCycleLR(
         optimizer, max_lr=max_lr, total_steps=n_epochs * len(train_loader)
     )
@@ -142,6 +145,7 @@ def main():
     parser.add_argument("--epochs", type=int, default=1, help="default 1 = quick sanity/demo run")
     parser.add_argument("--batch-size", type=int, default=512)
     parser.add_argument("--max-lr", type=float, default=0.1)
+    parser.add_argument("--label-smoothing", type=float, default=0.0)
     parser.add_argument("--amp", action="store_true", help="enable mixed precision (requires CUDA)")
     parser.add_argument("--data-root", type=str, default="/tmp/cifar_data")
     args = parser.parse_args()
@@ -159,6 +163,9 @@ def main():
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize(CIFAR_MEAN, CIFAR_STD),
+        # Cutout / random erasing: masks out a small random patch each time, another
+        # cheap, well-established regulariser that adds ~0.5-1% test accuracy on CIFAR-10.
+        transforms.RandomErasing(p=0.5, scale=(0.02, 0.2)),
     ])
     transform_test = transforms.Compose([
         transforms.ToTensor(),
@@ -176,7 +183,7 @@ def main():
 
     model, train_time, test_acc = train_resnet18_cifar(
         train_loader, test_loader, n_epochs=args.epochs, device=device,
-        use_amp=args.amp, max_lr=args.max_lr
+        use_amp=args.amp, max_lr=args.max_lr, label_smoothing=args.label_smoothing
     )
 
     # --- inference demo (lab requirement 2: must run inference live on Rangpur) ---
