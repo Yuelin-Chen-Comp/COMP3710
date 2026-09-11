@@ -96,7 +96,8 @@ def train_resnet18_cifar(train_loader, test_loader, n_epochs, device, use_amp=Fa
     # generalisation on CIFAR-10 (a small but consistent test-accuracy gain).
     loss_fn = nn.CrossEntropyLoss(label_smoothing=label_smoothing)
     scheduler = torch.optim.lr_scheduler.OneCycleLR(
-        optimizer, max_lr=max_lr, total_steps=n_epochs * len(train_loader)
+        optimizer, max_lr=max_lr, total_steps=n_epochs * len(train_loader),
+        pct_start=0.25,   # 25% ramp-up, 75% anneal-down: more time at low LR = better final convergence
     )
     amp_active = use_amp and device == "cuda"
     scaler = torch.amp.GradScaler("cuda", enabled=amp_active)
@@ -163,9 +164,6 @@ def main():
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         transforms.Normalize(CIFAR_MEAN, CIFAR_STD),
-        # Cutout / random erasing: masks out a small random patch each time, another
-        # cheap, well-established regulariser that adds ~0.5-1% test accuracy on CIFAR-10.
-        transforms.RandomErasing(p=0.5, scale=(0.02, 0.2)),
     ])
     transform_test = transforms.Compose([
         transforms.ToTensor(),
@@ -177,9 +175,9 @@ def main():
     print("train/test sizes:", len(full_train), len(full_test))
 
     train_loader = DataLoader(full_train, batch_size=args.batch_size, shuffle=True,
-                                num_workers=4, pin_memory=(device == "cuda"))
+                                num_workers=8, pin_memory=(device == "cuda"))
     test_loader = DataLoader(full_test, batch_size=args.batch_size, shuffle=False,
-                               num_workers=4, pin_memory=(device == "cuda"))
+                               num_workers=8, pin_memory=(device == "cuda"))
 
     model, train_time, test_acc = train_resnet18_cifar(
         train_loader, test_loader, n_epochs=args.epochs, device=device,
