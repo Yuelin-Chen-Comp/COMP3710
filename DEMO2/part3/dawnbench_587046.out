@@ -1,0 +1,45 @@
+Job 587046 on a100-1, started Fri Sep 11 10:29:05 AEST 2026
+name, memory.total [MiB]
+NVIDIA A100-PCIE-40GB, 40960 MiB
+device: cuda
+GPU: NVIDIA A100-PCIE-40GB
+train/test sizes: 50000 10000
+epoch  0: loss=1.6744  train_acc=0.4514
+epoch  1: loss=1.3574  train_acc=0.6196
+epoch  2: loss=1.1080  train_acc=0.7359
+epoch  3: loss=1.0028  train_acc=0.7835
+epoch  4: loss=0.9297  train_acc=0.8137
+epoch  5: loss=0.8793  train_acc=0.8360
+epoch  6: loss=0.8426  train_acc=0.8500
+epoch  7: loss=0.8119  train_acc=0.8645
+epoch  8: loss=0.7916  train_acc=0.8736
+epoch  9: loss=0.7708  train_acc=0.8837
+epoch 10: loss=0.7569  train_acc=0.8887
+epoch 11: loss=0.7442  train_acc=0.8950
+epoch 12: loss=0.7302  train_acc=0.8995
+epoch 13: loss=0.7194  train_acc=0.9066
+epoch 14: loss=0.7031  train_acc=0.9122
+epoch 15: loss=0.6878  train_acc=0.9184
+epoch 16: loss=0.6729  train_acc=0.9256
+epoch 17: loss=0.6531  train_acc=0.9343
+epoch 18: loss=0.6345  train_acc=0.9417
+epoch 19: loss=0.6092  train_acc=0.9538
+epoch 20: loss=0.5814  train_acc=0.9669
+epoch 21: loss=0.5575  train_acc=0.9770
+epoch 22: loss=0.5393  train_acc=0.9858
+epoch 23: loss=0.5332  train_acc=0.9878
+
+Training time: 370.60s on cuda (mixed precision active: True)
+Test accuracy: 0.9349
+
+Inference demo (first 10 test images):
+  pred=cat          true=cat          correct
+  pred=ship         true=ship         correct
+  pred=ship         true=ship         correct
+  pred=airplane     true=airplane     correct
+  pred=frog         true=frog         correct
+  pred=frog         true=frog         correct
+  pred=automobile   true=automobile   correct
+  pred=frog         true=frog         correct
+  pred=cat          true=cat          correct
+  pred=automobile   true=automobile   correct

@@ -1,0 +1,22 @@
+Running on node: a100-b
+name, memory.total [MiB]
+NVIDIA A100-PCIE-40GB, 40960 MiB
+device: cuda
+GPU: NVIDIA A100-PCIE-40GB
+train/test sizes: 50000 10000
+epoch  0: loss=1.9422  train_acc=0.3262
+
+Training time: 17.21s on cuda (mixed precision active: False)
+Test accuracy: 0.4737
+
+Inference demo (first 10 test images):
+  pred=cat          true=cat          correct
+  pred=ship         true=ship         correct
+  pred=ship         true=ship         correct
+  pred=ship         true=airplane     WRONG
+  pred=frog         true=frog         correct
+  pred=frog         true=frog         correct
+  pred=truck        true=automobile   WRONG
+  pred=deer         true=frog         WRONG
+  pred=dog          true=cat          WRONG
+  pred=automobile   true=automobile   correct

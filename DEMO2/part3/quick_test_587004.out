@@ -1,0 +1,22 @@
+Job 587004 on a100-1, started Fri Sep 11 09:12:49 AEST 2026
+name, memory.total [MiB]
+NVIDIA A100-PCIE-40GB, 40960 MiB
+device: cuda
+GPU: NVIDIA A100-PCIE-40GB
+train/test sizes: 50000 10000
+epoch  0: loss=1.9141  train_acc=0.3149
+
+Training time: 15.62s on cuda (mixed precision active: False)
+Test accuracy: 0.4540
+
+Inference demo (first 10 test images):
+  pred=frog         true=cat          WRONG
+  pred=automobile   true=ship         WRONG
+  pred=ship         true=ship         correct
+  pred=ship         true=airplane     WRONG
+  pred=frog         true=frog         correct
+  pred=frog         true=frog         correct
+  pred=truck        true=automobile   WRONG
+  pred=deer         true=frog         WRONG
+  pred=dog          true=cat          WRONG
+  pred=automobile   true=automobile   correct
