@@ -41,24 +41,27 @@ plus a `steps/` folder with any standalone scripts or extracted images used whil
   identical held-out test set for a fair comparison.
 - Training/test accuracy curves showing (and discussing) overfitting.
 
-### 3.2 DAWNBench challenge — ResNet-18 on CIFAR-10 (4 marks) ⏳ needs Rangpur
+### 3.2 DAWNBench challenge — ResNet-18 on CIFAR-10 (4 marks) ✅ run on Rangpur A100
 
 [`part3/Part3_2_DAWNBench.ipynb`](part3/Part3_2_DAWNBench.ipynb) — architecture, training
-function, and a local correctness smoke test (small subset, few epochs; **not** the real target).
+function, and a local correctness smoke test (small subset, few epochs).
 
-[`part3/train_resnet_cifar.py`](part3/train_resnet_cifar.py) — the Rangpur-ready CLI version of
-the same code (full dataset, `device="cuda"`, `--amp` for mixed precision).
+[`part3/train_resnet_cifar.py`](part3/train_resnet_cifar.py) — the CLI version that ran on
+Rangpur (full dataset, `cuda`, `--amp` mixed precision, OneCycle LR, label smoothing).
 
-[`part3/submit_quick_test.sh`](part3/submit_quick_test.sh),
+[`part3/cuda_check.sh`](part3/cuda_check.sh), [`part3/submit_quick_test.sh`](part3/submit_quick_test.sh),
 [`part3/submit_full_dawnbench.sh`](part3/submit_full_dawnbench.sh) — SLURM job scripts for the
-`comp3710` partition on Rangpur (quick 1-epoch sanity/demo run, and the full mixed-precision run
-respectively).
+`comp3710` partition (`--account=comp3710` required; conda env activated in-script).
 
-ResNet-18 is implemented from scratch (no pretrained/pre-built model), with the CIFAR-style stem
-(3x3 stride-1, no aggressive early downsampling) rather than the ImageNet stem. **Status:** code
-is written and verified for correctness locally; the actual DAWNBench targets (>90% accuracy,
->=94% in ~360s with mixed precision on a V100-class GPU, and the live Rangpur demo) still need to
-be run on the cluster once a GPU allocation comes through.
+[`part3/dawnbench_587046.out`](part3/dawnbench_587046.out) and the other `*.out` files — the actual
+Rangpur run logs.
+
+ResNet-18 is implemented from scratch (no pretrained/pre-built model), CIFAR-style stem.
+**Result on an A100 (mixed precision):** best run **93.49% test accuracy in 371 s**, 24 epochs.
+Requirement 1 (>90%, fast) met comfortably; requirement 2 (live inference + 1 epoch on Rangpur) is
+demonstrated live; requirement 3 (94% in ~360 s) is close on time, ~0.5% short on accuracy —
+closing that last bit reliably needs a longer schedule or the full DAWNBench "bag of tricks"
+beyond a plain ResNet-18.
 
 ## Part 4 — Recognition (8 marks)
 
