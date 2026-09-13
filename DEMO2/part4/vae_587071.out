@@ -1,0 +1,40 @@
+Job 587071 on a100-1, started Fri Sep 11 11:11:08 AEST 2026
+name, memory.total [MiB]
+NVIDIA A100-PCIE-40GB, 40960 MiB
+device: cuda
+GPU: NVIDIA A100-PCIE-40GB
+train/test slices: 9664 / 544
+params: 414,597
+epoch  0: loss=5770.05 recon=5719.88 kl=50.17
+epoch  1: loss=4360.86 recon=4333.74 kl=27.12
+epoch  2: loss=4300.37 recon=4282.46 kl=17.91
+epoch  3: loss=4267.28 recon=4253.01 kl=14.27
+epoch  4: loss=4248.65 recon=4236.53 kl=12.11
+epoch  5: loss=4236.89 recon=4226.04 kl=10.85
+epoch  6: loss=4226.74 recon=4216.70 kl=10.04
+epoch  7: loss=4222.95 recon=4213.44 kl=9.51
+epoch  8: loss=4215.97 recon=4206.79 kl=9.18
+epoch  9: loss=4213.19 recon=4204.30 kl=8.89
+epoch 10: loss=4210.36 recon=4201.66 kl=8.70
+epoch 11: loss=4209.52 recon=4201.05 kl=8.46
+epoch 12: loss=4206.67 recon=4198.33 kl=8.35
+epoch 13: loss=4205.80 recon=4197.54 kl=8.26
+epoch 14: loss=4204.19 recon=4196.01 kl=8.18
+epoch 15: loss=4203.10 recon=4195.02 kl=8.07
+epoch 16: loss=4202.49 recon=4194.52 kl=7.98
+epoch 17: loss=4200.91 recon=4193.00 kl=7.91
+epoch 18: loss=4200.25 recon=4192.39 kl=7.86
+epoch 19: loss=4199.59 recon=4191.76 kl=7.82
+epoch 20: loss=4200.53 recon=4192.83 kl=7.70
+epoch 21: loss=4198.40 recon=4190.70 kl=7.69
+epoch 22: loss=4197.05 recon=4189.39 kl=7.66
+epoch 23: loss=4196.73 recon=4189.08 kl=7.64
+epoch 24: loss=4196.13 recon=4188.53 kl=7.60
+epoch 25: loss=4195.19 recon=4187.59 kl=7.60
+epoch 26: loss=4194.76 recon=4187.17 kl=7.59
+epoch 27: loss=4193.82 recon=4186.26 kl=7.55
+epoch 28: loss=4193.59 recon=4186.06 kl=7.53
+epoch 29: loss=4193.47 recon=4185.96 kl=7.51
+
+Training time: 334.6s on cuda
+saved: vae_curves.png vae_recon.png vae_latent_scatter.png vae_manifold.png

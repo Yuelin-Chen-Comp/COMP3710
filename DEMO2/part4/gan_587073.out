@@ -1,0 +1,70 @@
+Job 587073 on a100-1, started Fri Sep 11 11:28:02 AEST 2026
+name, memory.total [MiB]
+NVIDIA A100-PCIE-40GB, 40960 MiB
+device: cuda
+GPU: NVIDIA A100-PCIE-40GB
+train slices: 9664
+G params: 3,804,032  D params: 2,763,520
+epoch  0: loss_D=0.0621 loss_G=6.3339
+epoch  1: loss_D=0.4260 loss_G=7.7081
+epoch  2: loss_D=0.9131 loss_G=5.7793
+epoch  3: loss_D=1.0032 loss_G=2.9000
+epoch  4: loss_D=0.9031 loss_G=3.7355
+epoch  5: loss_D=1.1981 loss_G=2.2026
+epoch  6: loss_D=0.9862 loss_G=2.5685
+epoch  7: loss_D=1.1052 loss_G=2.4294
+epoch  8: loss_D=1.0773 loss_G=2.5321
+epoch  9: loss_D=1.0547 loss_G=2.3080
+epoch 10: loss_D=1.0291 loss_G=2.4501
+epoch 11: loss_D=1.0078 loss_G=2.5302
+epoch 12: loss_D=0.9391 loss_G=2.8325
+epoch 13: loss_D=0.9716 loss_G=2.6529
+epoch 14: loss_D=0.8924 loss_G=3.0631
+epoch 15: loss_D=0.9309 loss_G=2.6911
+epoch 16: loss_D=0.9345 loss_G=2.6660
+epoch 17: loss_D=0.8922 loss_G=2.8557
+epoch 18: loss_D=0.8986 loss_G=2.9042
+epoch 19: loss_D=0.8824 loss_G=2.8565
+epoch 20: loss_D=0.9016 loss_G=2.7585
+epoch 21: loss_D=0.8022 loss_G=3.4382
+epoch 22: loss_D=0.7944 loss_G=3.0023
+epoch 23: loss_D=0.7951 loss_G=3.2289
+epoch 24: loss_D=0.7384 loss_G=3.5585
+epoch 25: loss_D=0.7666 loss_G=3.3799
+epoch 26: loss_D=0.7629 loss_G=3.5267
+epoch 27: loss_D=0.6508 loss_G=3.2543
+epoch 28: loss_D=0.7242 loss_G=3.6184
+epoch 29: loss_D=0.6797 loss_G=3.6401
+epoch 30: loss_D=0.6740 loss_G=3.6100
+epoch 31: loss_D=0.6289 loss_G=3.6572
+epoch 32: loss_D=0.6571 loss_G=3.7412
+epoch 33: loss_D=0.5849 loss_G=3.7947
+epoch 34: loss_D=0.5526 loss_G=4.2251
+epoch 35: loss_D=0.5272 loss_G=3.9071
+epoch 36: loss_D=0.5774 loss_G=3.9630
+epoch 37: loss_D=0.5727 loss_G=3.7832
+epoch 38: loss_D=0.5075 loss_G=3.8174
+epoch 39: loss_D=0.5452 loss_G=3.9295
+epoch 40: loss_D=0.5170 loss_G=4.0414
+epoch 41: loss_D=0.5166 loss_G=4.0511
+epoch 42: loss_D=0.4973 loss_G=3.9350
+epoch 43: loss_D=0.5710 loss_G=4.2017
+epoch 44: loss_D=0.4186 loss_G=4.0756
+epoch 45: loss_D=0.4656 loss_G=4.0309
+epoch 46: loss_D=0.4010 loss_G=4.2707
+epoch 47: loss_D=0.4345 loss_G=4.0182
+epoch 48: loss_D=0.4059 loss_G=4.2661
+epoch 49: loss_D=0.4276 loss_G=4.3898
+epoch 50: loss_D=0.4912 loss_G=4.4019
+epoch 51: loss_D=0.3473 loss_G=4.4810
+epoch 52: loss_D=0.3082 loss_G=4.4231
+epoch 53: loss_D=0.3493 loss_G=4.3534
+epoch 54: loss_D=0.3622 loss_G=4.6043
+epoch 55: loss_D=0.2877 loss_G=4.4897
+epoch 56: loss_D=0.3227 loss_G=4.5260
+epoch 57: loss_D=0.4350 loss_G=4.4666
+epoch 58: loss_D=0.3045 loss_G=4.3770
+epoch 59: loss_D=0.3243 loss_G=4.5919
+
+Training time: 633.9s on cuda
+saved: gan_curves.png gan_progress.png gan_final_samples.png

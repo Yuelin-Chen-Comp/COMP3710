@@ -1,0 +1,41 @@
+Job 587072 on a100-1, started Fri Sep 11 11:17:08 AEST 2026
+name, memory.total [MiB]
+NVIDIA A100-PCIE-40GB, 40960 MiB
+device: cuda
+GPU: NVIDIA A100-PCIE-40GB
+train/val/test slices: 9664 / 1120 / 544
+params: 1,927,940
+epoch  0: loss=0.1837  val DSC background=0.998 CSF=0.867 grey matter=0.907 white matter=0.948
+epoch  1: loss=0.0471  val DSC background=0.999 CSF=0.920 grey matter=0.942 white matter=0.966
+epoch  2: loss=0.0376  val DSC background=0.998 CSF=0.917 grey matter=0.939 white matter=0.959
+epoch  3: loss=0.0344  val DSC background=0.999 CSF=0.924 grey matter=0.946 white matter=0.970
+epoch  4: loss=0.0313  val DSC background=0.999 CSF=0.922 grey matter=0.937 white matter=0.958
+epoch  5: loss=0.0299  val DSC background=0.999 CSF=0.923 grey matter=0.943 white matter=0.969
+epoch  6: loss=0.0285  val DSC background=0.999 CSF=0.931 grey matter=0.949 white matter=0.970
+epoch  7: loss=0.0273  val DSC background=0.999 CSF=0.933 grey matter=0.949 white matter=0.970
+epoch  8: loss=0.0263  val DSC background=0.999 CSF=0.914 grey matter=0.938 white matter=0.967
+epoch  9: loss=0.0256  val DSC background=0.999 CSF=0.929 grey matter=0.944 white matter=0.969
+epoch 10: loss=0.0252  val DSC background=0.999 CSF=0.933 grey matter=0.949 white matter=0.971
+epoch 11: loss=0.0243  val DSC background=0.999 CSF=0.931 grey matter=0.944 white matter=0.966
+epoch 12: loss=0.0240  val DSC background=0.999 CSF=0.933 grey matter=0.947 white matter=0.968
+epoch 13: loss=0.0237  val DSC background=0.999 CSF=0.934 grey matter=0.948 white matter=0.969
+epoch 14: loss=0.0231  val DSC background=0.999 CSF=0.932 grey matter=0.951 white matter=0.971
+epoch 15: loss=0.0230  val DSC background=0.999 CSF=0.936 grey matter=0.950 white matter=0.970
+epoch 16: loss=0.0221  val DSC background=0.999 CSF=0.934 grey matter=0.950 white matter=0.972
+epoch 17: loss=0.0220  val DSC background=0.999 CSF=0.931 grey matter=0.949 white matter=0.971
+epoch 18: loss=0.0215  val DSC background=0.999 CSF=0.933 grey matter=0.951 white matter=0.971
+epoch 19: loss=0.0213  val DSC background=0.999 CSF=0.927 grey matter=0.942 white matter=0.965
+epoch 20: loss=0.0211  val DSC background=0.999 CSF=0.935 grey matter=0.951 white matter=0.971
+epoch 21: loss=0.0207  val DSC background=0.999 CSF=0.936 grey matter=0.952 white matter=0.972
+epoch 22: loss=0.0205  val DSC background=0.999 CSF=0.924 grey matter=0.947 white matter=0.971
+epoch 23: loss=0.0204  val DSC background=0.999 CSF=0.934 grey matter=0.950 white matter=0.972
+epoch 24: loss=0.0200  val DSC background=0.999 CSF=0.932 grey matter=0.947 white matter=0.970
+
+Training time: 643.4s on cuda
+
+Final TEST-set mean DSC per class:
+  background     0.9992  PASS (>0.9)
+  CSF            0.9348  PASS (>0.9)
+  grey matter    0.9432  PASS (>0.9)
+  white matter   0.9665  PASS (>0.9)
+saved: unet_curves.png unet_predictions.png
