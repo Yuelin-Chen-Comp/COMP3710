@@ -70,28 +70,31 @@ beyond a plain ResNet-18.
 Not a coding task — complete the "Version Control for Teams using Git" short course on edX (see
 the course's Blackboard/Ed Discussion post for the current enrolment link).
 
-### 4.2–4.4 Recognition tasks (up to 7 marks, Hard tier — all three tasks attempted)
+### 4.2–4.4 Recognition tasks (up to 7 marks, Hard tier — all three tasks completed) ✅ run on real OASIS
 
-All three tasks use the **Preprocessed OASIS** brain MRI dataset, which only exists at
-`/home/groups/comp3710/` on Rangpur — not available locally. Each task is therefore built and
-verified locally on a stand-in dataset (documented in each notebook) first, with a "porting to
-Rangpur" section spelling out exactly what changes for the real data. **All three are code-complete
-and locally verified; all three still need a real Rangpur/OASIS run** for full marks (the actual
-target metrics — DSC>0.9 on real brain tissue, OASIS-realistic GAN samples — can only be assessed
-on the real dataset, and the live demo requirement needs Rangpur regardless).
+All three tasks use the **Preprocessed OASIS** brain MRI dataset
+(`/home/groups/comp3710/OASIS/keras_png_slices_*`, 256x256 PNG slices, 4-class segmentation masks
+{0,85,170,255}). Each notebook first builds and verifies the approach on a stand-in dataset
+(documented inline), then [`part4/oasis_dataset.py`](part4/oasis_dataset.py) +
+`part4/train_{vae,unet,gan}_oasis.py` + `part4/submit_{vae,unet,gan}.sh` are the versions that
+actually ran on Rangpur's A100s against the real dataset — logs and generated images are committed
+alongside.
 
-- **Task 1 — VAE (Easy, 3 marks)** ✅ locally verified on MNIST
-  [`part4/Part4_Task1_VAE.ipynb`](part4/Part4_Task1_VAE.ipynb) — reconstructions, a 2D
-  latent-space scatter plot, and the required manifold visualisation (decoding a grid of latent
-  points) all included and discussed.
-- **Task 2 — UNet segmentation (+2 marks, Medium)** ✅ locally verified on synthetic shapes
-  [`part4/Part4_Task2_UNet.ipynb`](part4/Part4_Task2_UNet.ipynb) — categorical (one-hot) output,
-  per-class Dice score (>0.99 on the synthetic task; real OASIS will be a harder bar), and
-  input/ground-truth/prediction visualisations.
-- **Task 3 — GAN (+2 marks, Hard)** ✅ locally verified on MNIST (per the lab sheet's own
-  suggestion to start there before OASIS)
-  [`part4/Part4_Task3_GAN.ipynb`](part4/Part4_Task3_GAN.ipynb) — generator/discriminator training
-  curves, and generated-sample snapshots across training showing no mode collapse.
+- **Task 1 — VAE (Easy, 3 marks)** ✅ **on real OASIS**: 30 epochs, 335s.
+  [`part4/vae_recon.png`](part4/vae_recon.png) (reconstructions),
+  [`part4/vae_latent_scatter.png`](part4/vae_latent_scatter.png) (2D latent space),
+  [`part4/vae_manifold.png`](part4/vae_manifold.png) (the required manifold visualisation — a
+  20x20 grid of decoded latent points, smoothly morphing from noise into distinct brain slices).
+- **Task 2 — UNet segmentation (+2 marks, Medium)** ✅ **on real OASIS**: 25 epochs, 643s.
+  **Test-set DSC: background 0.999, CSF 0.935, grey matter 0.943, white matter 0.967 — all four
+  classes clear the >0.9 target.** Categorical (one-hot) output via per-pixel multi-class logits.
+  [`part4/unet_predictions.png`](part4/unet_predictions.png),
+  [`part4/unet_curves.png`](part4/unet_curves.png).
+- **Task 3 — GAN (+2 marks, Hard)** ✅ **on real OASIS**: 60 epochs, 634s. Clear, non-collapsed
+  brain-slice samples with varied ventricle shapes/sizes by the end of training; no mode collapse.
+  [`part4/gan_progress.png`](part4/gan_progress.png) (generation quality over training),
+  [`part4/gan_final_samples.png`](part4/gan_final_samples.png) (64 fresh samples),
+  [`part4/gan_curves.png`](part4/gan_curves.png).
 
 ## Environment notes
 
