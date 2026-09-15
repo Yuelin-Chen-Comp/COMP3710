@@ -129,6 +129,12 @@ def main():
     for name, d in zip(CLASS_NAMES, td):
         print(f"  {name:<14} {d:.4f}  {'PASS (>0.9)' if d > 0.9 else 'below target'}", flush=True)
 
+    # ---- save the trained weights for the live-inference demo (lab requires running
+    # inference live during the demonstration -- retraining live would take ~10 min) ----
+    torch.save({"state_dict": model.state_dict(), "base": args.base, "img_size": args.img_size},
+               "unet_oasis.pt")
+    print("saved checkpoint: unet_oasis.pt", flush=True)
+
     # ---- curves ----
     hv = np.array(hist_val_dice)
     fig, ax = plt.subplots(1, 2, figsize=(12, 4))
